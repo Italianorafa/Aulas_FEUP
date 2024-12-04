@@ -11,7 +11,7 @@ int fatorial(int n){
     return fat;
 }
 
-float seno (float ang, float toler){
+float f_seno(float ang, float toler, int *termos){
     float sin=0.0, termo;
     int i = 1;
     do{
@@ -20,19 +20,22 @@ float seno (float ang, float toler){
             sin += termo;
         }
         i++;
+        *termos = *termos + 1;
     }while(fabs(termo) >= toler);
+    *termos = *termos - 1;
     
     return sin;
 }
 
 int main(){
-    float angulo, tolerancia;
+    float angulo, tolerancia, seno; int termos = 0;
 
     printf("Qual é o valor do ângulo? ");
     scanf("%f", &angulo);
     printf("Qual é a tolerância? ");
     scanf("%f", &tolerancia);
+    seno = f_seno(angulo, tolerancia, &termos);
 
-    printf("O seno de %.2f é: %f", angulo, seno(angulo, tolerancia));
+    printf("O seno de %.2f é: %f (%d termos da serie)", angulo, seno, termos);
     return 0;
 }
