@@ -1,39 +1,37 @@
 #include <stdio.h>
 
-void printf_vet(int vet[],int n){
-    printf("{ ");
-    for (int i=0; i<n; i++){
-        printf("%d", vet[i]);
+int fibonacci(int n) {
+    if (n <= 1) {
+        return n;
+    } else {
+        return fibonacci(n - 1) + fibonacci(n - 2);
     }
-    printf(" }\n");
 }
 
-void fibo_NMax(int vet[], int tam){
-    
-    if (tam == 0){
-        vet[tam] = 0;
-    }
-    else if (tam == 1){
-        vet[tam] = 1;
-    }
-    else{
-        vet[tam] = (vet[tam-2] + vet[tam-1]);
-    }
-}      
+int main() {
+    int max_value, max_terms, choice;
 
+    printf("Pretende usar numero maximo de valores (1) ou valor maximo (2)? ");
+    scanf("%d", &choice);
 
-int main(){
-    int tamanho, n;
-    printf("Pretende usar máximo de valores (1) ou valor máximo? ");
-    scanf("%d", &n);
-    if (n == 1){
-        printf("Introduza o número máximo de valores: ");
-        scanf("%d",&tamanho);
+    if (choice == 1) {
+        printf("Introduza um numero maximo de valores: ");
+        scanf("%d", &max_terms);
+
+        for (int i = 0; i < max_terms; i++) {
+            printf("%d ", fibonacci(i));
+        }
+    } else if (choice == 2) {
+        printf("Introduza o valor maximo: ");
+        scanf("%d", &max_value);
+
+        int n = 0;
+        while (fibonacci(n) <= max_value) {
+            printf("%d ", fibonacci(n));
+            n++;
+        }
     }
-    int vetor[tamanho];
-    fibo_NMax(vetor, tamanho);
-    printf("A sequência é: ");
-    printf_vet(vetor,tamanho);
-    
+
+    printf("\n");
     return 0;
 }
